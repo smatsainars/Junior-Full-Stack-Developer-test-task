@@ -1,0 +1,10 @@
+# Ignore dependencies
+/vendor/
+/node_modules/
+
+# Ignore environment files
+.env
+
+# Ignore IDE files
+.vscode/
+.idea/
