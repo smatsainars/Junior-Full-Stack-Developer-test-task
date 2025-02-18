@@ -1,3 +1,5 @@
 .wrap-navba{
     display: flex;
+
+    justify-content: space-between;
 }
