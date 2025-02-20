@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { GET_PRODUCTS } from '../../graphql/queries';
 import ProductCard from './ProductCard';
 import { Product } from '../../types';
+import './ProductList.scss';
 
 interface ProductListProps {
   category: string;
@@ -46,7 +47,7 @@ const ProductList: React.FC<ProductListProps> = ({
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="wrap-products">
       {data.products.map((product: Product) => (
         <ProductCard
           key={product.id}

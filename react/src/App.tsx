@@ -55,7 +55,7 @@ function App() {
             setCurrentCategory={setCurrentCategory}
           />
 
-          <main className="container mx-auto px-4 py-8">
+          <main className="wrap-main">
             <Routes>
               <Route 
                 path="/" 

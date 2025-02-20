@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CartItem } from '../../types';
+import './Header.scss';
+import logo from '../../assets/logo.png';
+import emptyCart from '../../assets/empty-cart.svg';
 
 interface HeaderProps {
   setCartOpen: (isOpen: boolean) => void;
@@ -23,17 +26,14 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header className="wrap-navbar">
       {/* Left section: Navigation Categories */}
-      <div className="flex items-center space-x-8">
+      <div className="wrap-navbar-menu">
         {['all', 'tech', 'clothes'].map((category) => (
           <Link
             key={category}
             to={`/${category === 'all' ? '' : `category/${category}`}`}
             data-testid={category === activeCategory ? 'active-category-link' : 'category-link'}
-            className={`uppercase ${
-              category === activeCategory
-                ? 'text-primary border-b-2 border-primary' 
-                : 'text-secondary hover:text-primary'
-            }`}
+            className={`link-navbar ${category === activeCategory ? 'active border-b-2' : ''
+              }`}
             onClick={() => setCurrentCategory(category)}
           >
             {category}
@@ -43,33 +43,29 @@ const Header: React.FC<HeaderProps> = ({
 
       {/* Center section: Logo */}
       <div className="inset-x-0 flex items-center justify-center mx-auto">
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           onClick={() => setCurrentCategory('all')}
           className="text-xl font-bold"
         >
-          LOGO
+          <img src={logo} alt="Logo" className="w-12 h-12" />
         </Link>
       </div>
 
       {/* Right section: Cart Button */}
-      <button
-        data-testid="cart-btn"
-        className="relative z-10 p-2 cursor-pointer"
+      <div
+        className="cart-button"
         onClick={() => setCartOpen(true)}
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-        </svg>
+        <img src={emptyCart} alt="Cart" className="w-8 h-8" />
         {totalItems > 0 && (
-          <div 
+          <div
             className="absolute flex items-center justify-center w-5 h-5 -mt-1 -mr-1 text-sm text-white bg-green-500 rounded-full -top-1 -right-2"
-            data-testid="cart-count-bubble"
           >
             {totalItems}
           </div>
         )}
-      </button>
+      </div>
 
       {/* Cart Modal - You can add this if needed */}
       {/* {isCartOpen && (

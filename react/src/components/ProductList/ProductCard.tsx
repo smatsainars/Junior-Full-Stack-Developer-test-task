@@ -35,7 +35,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Link 
       to={`/product/${product.id}`}
-      data-testid={`product-${product.name.toLowerCase().replace(/\s+/g, '-')}`}
       className="block relative group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
