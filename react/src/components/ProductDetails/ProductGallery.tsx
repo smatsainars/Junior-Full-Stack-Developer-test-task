@@ -20,11 +20,11 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ gallery }) => {
 
   const settings: Settings = {
     dots: false,
-    infinite: true,
+    infinite: false, 
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: gallery.length > 1,
     beforeChange: (_, next) => setCurrentSlide(next),
     // You can style or replace these buttons as needed:
     prevArrow: <button className="slick-prev">Previous</button>,

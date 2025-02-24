@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../types';
+import './ProductCard.scss';
+
+import cartbtn from '../../assets/cart-btn.svg';
 
 interface ProductCardProps {
   product: Product;
@@ -35,19 +38,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Link 
       to={`/product/${product.id}`}
-      className="block relative group"
+      className="wrap-product-card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`relative ${!product.inStock && 'opacity-50'}`}>
+      <div className={`wrap-img ${!product.inStock && 'opacity-50'}`}>
         <img 
           src={product.gallery[0]} 
           alt={product.name}
-          className="w-full aspect-square object-cover"
         />
         
         {!product.inStock && (
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="wrap-out-of-stock">
             <span className="text-lg font-medium text-gray-500">OUT OF STOCK</span>
           </div>
         )}
@@ -55,18 +57,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
         {product.inStock && isHovered && (
           <button
             onClick={handleQuickAdd}
-            className="absolute bottom-4 right-4 bg-green-500 text-white p-2 rounded-full hover:bg-opacity-90 transition-opacity opacity-0 group-hover:opacity-100"
+            className="btn-quick-add"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
+            <img src={cartbtn} alt="Add to cart" />
           </button>
         )}
       </div>
 
-      <div className="mt-4">
+      <div className="wrap-product-info">
         <h3 className="text-lg font-medium">{product.name}</h3>
-        <p className="text-sm text-gray-600">{product.brand}</p>
         <p className="text-lg font-medium mt-1">
           ${price.amount.toFixed(2)}
         </p>

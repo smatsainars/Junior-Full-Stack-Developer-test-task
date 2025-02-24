@@ -1,0 +1,97 @@
+.wrap-product-details {
+    display: flex;
+    justify-content: space-between;
+    .wrap-product-tumbnails {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        .thumbnail {
+            width: 80px;
+            height: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+    }
+
+    .product-details {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 292px;
+        .product-details-header{
+
+            h1 {
+                font-weight: 600;
+                font-size: 30px;
+                margin: 0;
+            }
+        }
+
+        .product-attributes{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .product-attribute{
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .wrap-attribute-items{
+                display: flex;
+                gap: 12px;
+                .btn-size{
+                    padding: 14px;
+                    border: 1px solid #000;
+                    white-space: nowrap;
+
+                    &.active{
+                        background-color: #000;
+                        color: #fff;
+                    }
+                }
+
+                .color-btn{
+                    width: 30px;
+                    height: 30px;
+                    cursor: pointer;
+
+                    &.active{
+                        outline: 2px solid #5ECE7B;
+                        outline-offset: 1px;
+                    }
+                }
+            }
+        }
+
+        .product-price{
+            .product-price-title{
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 18px;
+            }
+            .product-price-amount{
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 18px;
+            }
+        }
+
+        .product-description{
+            h1{
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 18px;
+            }
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        
+    }
+
+}

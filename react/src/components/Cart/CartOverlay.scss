@@ -1,0 +1,50 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 90; // Ensure this is behind the cart panel if needed
+  }
+  
+  .wrap-cart-panel {
+    position: fixed;
+    top: 69px;
+    right: 72px;
+    z-index: 100; // This sits above the overlay
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+    overflow-y: auto;
+    background-color: #ffffff;
+    padding: 32px 16px;
+
+    .cart-panel{
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+
+        .wrap-cart-items {
+            max-height: 50vh;
+            overflow: auto;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-weight: 700;
+        }
+    }
+    .wrap-cart-action {
+        width: 100%;
+        .primary-btn {
+            width: 100%;
+        }
+    }
+
+  }
+  

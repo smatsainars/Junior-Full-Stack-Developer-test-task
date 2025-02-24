@@ -47,14 +47,19 @@ const ProductList: React.FC<ProductListProps> = ({
   }
 
   return (
-    <div className="wrap-products">
-      {data.products.map((product: Product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          onAddToCart={onAddToCart}
-        />
-      ))}
+    <div>
+      <h1 className="title-main">
+        {category}
+      </h1>
+      <div className="wrap-products">
+        {data.products.map((product: Product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAddToCart={onAddToCart}
+          />
+        ))}
+      </div>
     </div>
   );
 };

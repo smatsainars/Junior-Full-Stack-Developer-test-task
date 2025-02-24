@@ -2,15 +2,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Dotenv\Dotenv;
 use FastRoute\RouteCollector;
 use FastRoute\Dispatcher;
 use function FastRoute\simpleDispatcher;
 use App\Controller\GraphQL;
 
-// 1) Load environment variables (if not already done in bootstrap)
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
 
 // CORS Headers
 header('Access-Control-Allow-Origin: http://localhost:5173');

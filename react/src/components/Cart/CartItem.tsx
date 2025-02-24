@@ -33,45 +33,60 @@ const CartItem: React.FC<CartItemProps> = ({
           >
             <p className="attribute-label">{attr.name}:</p>
             <div className="attribute-options">
-              {attr.items.map((option) => (
-                <button
-                  key={`${attr.name}-${option.value}`}
-                  data-testid={`cart-item-attribute-${attr.name.toLowerCase()}-${option.value.toLowerCase()}${
-                    item.selectedAttributes[attr.name] === option.value ? '-selected' : ''
-                  }`}
-                  className={`option ${
-                    item.selectedAttributes[attr.name] === option.value ? 'selected' : ''
-                  }`}
-                  onClick={() => handleAttributeChange(attr.name, option.value)}
-                >
-                  {option.displayValue}
-                </button>
-              ))}
+              {attr.type === 'swatch' ? (
+                attr.items.map((option) => (
+                  <button
+                    key={`${attr.name}-${option.value}`}
+                    data-testid={`cart-item-attribute-${attr.name.toLowerCase()}-${option.value.toLowerCase()}${
+                      item.selectedAttributes[attr.name] === option.value ? '-selected' : ''
+                    }`}
+                    className={`color-btn ${
+                      item.selectedAttributes[attr.name] === option.value ? 'active' : ''
+                    }`}
+                    style={{ backgroundColor: option.value }}
+                    onClick={() => handleAttributeChange(attr.name, option.value)}
+                  />
+                ))
+              ) : (
+                attr.items.map((option) => (
+                  <button
+                    key={`${attr.name}-${option.value}`}
+                    data-testid={`cart-item-attribute-${attr.name.toLowerCase()}-${option.value.toLowerCase()}${
+                      item.selectedAttributes[attr.name] === option.value ? '-selected' : ''
+                    }`}
+                    className={`btn-size ${
+                      item.selectedAttributes[attr.name] === option.value ? 'active' : ''
+                    }`}
+                    onClick={() => handleAttributeChange(attr.name, option.value)}
+                  >
+                    {option.displayValue}
+                  </button>
+                ))
+              )}
             </div>
           </div>
         ))}
       </div>
       <div className="cart-item__quantity">
-          <button
-            data-testid="cart-item-amount-increase"
-            className="quantity-btn"
-            onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-          >
-            +
-          </button>
-          <span data-testid="cart-item-amount" className="quantity-value">
-            {item.quantity}
-          </span>
-          <button
-            data-testid="cart-item-amount-decrease"
-            className="quantity-btn"
-            onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-          >
-            -
-          </button>
-        </div>
+        <button
+          data-testid="cart-item-amount-increase"
+          className="quantity-btn"
+          onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+        >
+          +
+        </button>
+        <span data-testid="cart-item-amount" className="quantity-value">
+          {item.quantity}
+        </span>
+        <button
+          data-testid="cart-item-amount-decrease"
+          className="quantity-btn"
+          onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+        >
+          -
+        </button>
+      </div>
       <div className="cart-item__actions">
-
         <img
           src={item.gallery[0]}
           alt={item.name}
@@ -89,14 +104,10 @@ const CartItem: React.FC<CartItemProps> = ({
 
         .cart-item__details {
           flex: 1;
-          p{
-            margin: 0;
-            }
         }
 
-        .cart-item__title {
+        .cart-item__details p {
           margin: 0;
-          font-size: 1.2rem;
         }
 
         .cart-item__price {
@@ -105,6 +116,7 @@ const CartItem: React.FC<CartItemProps> = ({
         }
 
         .cart-item__attributes {
+          margin-top: 0.5rem;
         }
 
         .attribute-label {
@@ -117,10 +129,10 @@ const CartItem: React.FC<CartItemProps> = ({
           display: flex;
           gap: 0.5rem;
           flex-wrap: wrap;
-          flex-direction: column;
+          flex-direction: row;
         }
 
-        .option {
+        .btn-size {
           padding: 0.5rem 1rem;
           border: 1px solid #ccc;
           background: none;
@@ -128,22 +140,32 @@ const CartItem: React.FC<CartItemProps> = ({
           transition: all 0.2s;
         }
 
-        .option:hover {
+        .btn-size:hover {
           background: #f5f5f5;
         }
 
-        .option.selected {
+        .btn-size.active {
           background: #2b2b2b;
           color: white;
           border-color: #2b2b2b;
         }
 
-        .cart-item__actions {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-          margin-left: 1rem;
+        .color-btn {
+          width: 2rem;
+          height: 2rem;
+          padding: 0;
+          border: 1px solid #ccc;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .color-btn:hover {
+          background: #f5f5f5;
+        }
+
+        .color-btn.active {
+          background: #2b2b2b;
+          border-color: #2b2b2b;
         }
 
         .cart-item__quantity {
@@ -171,6 +193,14 @@ const CartItem: React.FC<CartItemProps> = ({
         .quantity-value {
           font-size: 1rem;
           font-weight: bold;
+        }
+
+        .cart-item__actions {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          margin-left: 1rem;
         }
 
         .cart-item__image {

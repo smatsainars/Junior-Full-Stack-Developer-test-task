@@ -5,20 +5,27 @@ import { GET_PRODUCT } from '../../graphql/queries';
 import ProductGallery from './ProductGallery';
 import ProductAttributes from './ProductAttributes';
 import { Product } from '../../types';
+import { useParams } from 'react-router-dom';
+
+import './ProductDetails.scss';
 
 export interface ProductDetailsProps {
-  productId: string;
   onAddToCart: (product: Product, selectedAttributes: Record<string, string>) => void;
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({
-  productId,
   onAddToCart
 }) => {
   const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
+
+  const { id } = useParams();
+
   const { loading, error, data } = useQuery(GET_PRODUCT, {
-    variables: { id: productId }
+    variables: { id: id }
   });
+
+  console.log('ProductDetails:', { loading, error, data });
+  
 
   if (loading) return (
     <div className="flex justify-center items-center min-h-[600px]">
@@ -34,7 +41,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
 
   const product = data?.product as Product;
   if (!product) return null;
-
+  console.log(product);
+  
   const price = product.prices[0];
   const allAttributesSelected = product.attributes?.every((attr) => 
     selectedAttributes[attr.name]
@@ -42,13 +50,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
 
   return (
     <div className="wrap-product-details">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <ProductGallery images={product.gallery} />
 
-        <div className="space-y-6">
-          <div>
-            <h1 className="text-3xl font-light">{product.name}</h1>
-            <p className="text-xl mt-1">{product.brand}</p>
+        <ProductGallery gallery={product.gallery} />
+
+        <div className="product-details">
+          <div className="product-details-header">
+            <h1>{product.name}</h1>
           </div>
 
           {product.attributes && (
@@ -61,17 +68,16 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
             />
           )}
 
-          <div>
-            <h2 className="text-sm font-semibold uppercase mb-2">Price:</h2>
-            <p className="text-2xl">${price.amount.toFixed(2)}</p>
+          <div className="product-price">
+            <h2 className="product-price-title">Price:</h2>
+            <p className="product-price-amount">${price.amount.toFixed(2)}</p>
           </div>
 
           <button
-            data-testid="add-to-cart"
-            className={`w-full py-3 ${
+            className={`primary-btn ${
               !product.inStock || !allAttributesSelected
-                ? 'bg-gray-300 cursor-not-allowed'
-                : 'bg-green-500 hover:bg-opacity-90'
+                ? 'disabled'
+                : ''
             } text-white`}
             disabled={!product.inStock || !allAttributesSelected}
             onClick={() => onAddToCart(product, selectedAttributes)}
@@ -81,11 +87,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
 
           <div 
             data-testid="product-description"
-            className="prose max-w-none"
+            className="product-description"
             dangerouslySetInnerHTML={{ __html: product.description || '' }}
           />
         </div>
-      </div>
     </div>
   );
 };

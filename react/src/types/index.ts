@@ -3,6 +3,7 @@ export interface AttributeItem {
   id: string;
   displayValue: string;
   value: string;
+  selectedAttributes?: Record<string, string>;
 }
 
 export interface Attribute {

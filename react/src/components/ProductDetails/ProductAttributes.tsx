@@ -14,24 +14,25 @@ const ProductAttributes: React.FC<ProductAttributesProps> = ({
   onChange
 }) => {
   return (
-    <div className="space-y-4">
+    <div className="product-attributes">
       {attributes.map(attribute => (
         <div 
+          className="product-attribute"
           key={attribute.id}
           data-testid={`product-attribute-${attribute.name.toLowerCase()}`}
         >
           <h3 className="text-sm font-semibold uppercase mb-2">{attribute.name}:</h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="wrap-attribute-items">
             {attribute.type === 'swatch' ? (
               // Color swatches
               attribute.items.map(item => (
                 <button
                   key={item.id}
                   onClick={() => onChange(attribute.name, item.value)}
-                  className={`w-8 h-8 border-2 ${
+                  className={`color-btn ${
                     selectedAttributes[attribute.name] === item.value
-                      ? 'border-green-500'
-                      : 'border-gray-200'
+                      ? 'active'
+                      : ''
                   }`}
                   style={{ backgroundColor: item.value }}
                   title={item.displayValue}
@@ -43,10 +44,10 @@ const ProductAttributes: React.FC<ProductAttributesProps> = ({
                 <button
                   key={item.id}
                   onClick={() => onChange(attribute.name, item.value)}
-                  className={`px-3 py-2 border ${
+                  className={`btn-size ${
                     selectedAttributes[attribute.name] === item.value
-                      ? 'bg-black text-white'
-                      : 'bg-white text-black hover:bg-gray-50'
+                      ? 'active'
+                      : ''
                   }`}
                 >
                   {item.displayValue}

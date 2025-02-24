@@ -5,9 +5,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { client } from "./config/apollo";
 import Header from "./components/Header/Header";
 import ProductList from "./components/ProductList/ProductList";
-import ProductDetailsWrapper from "./components/ProductDetails/ProductDetailsWrapper";
 import CartOverlay from "./components/Cart/CartOverlay";
 import { CartItem, Product } from "./types";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 
 function App() {
   const [currentCategory, setCurrentCategory] = useState<string>('all');
@@ -44,6 +44,23 @@ function App() {
     }
   };
 
+  const onUpdateAttributes = (id: string, attributeName: string, value: string) => {
+    console.log('onUpdateAttributes:', id, attributeName, value);
+    
+    setCartItems(cartItems.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          selectedAttributes: {
+            ...item.selectedAttributes,
+            [attributeName]: value
+          }
+        };
+      }
+      return item;
+    }));
+  }
+
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
@@ -78,7 +95,7 @@ function App() {
               <Route 
                 path="/product/:id" 
                 element={
-                  <ProductDetailsWrapper
+                  <ProductDetails
                     onAddToCart={handleAddToCart}
                   />
                 } 
@@ -91,6 +108,7 @@ function App() {
               items={cartItems}
               onClose={() => setIsCartOpen(false)}
               onUpdateQuantity={handleUpdateCartItem}
+              onUpdateAttributes={onUpdateAttributes}
             />
           )}
         </div>

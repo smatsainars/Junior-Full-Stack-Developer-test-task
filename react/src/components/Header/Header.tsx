@@ -53,19 +53,19 @@ const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Right section: Cart Button */}
-      <div
+      <button
         className="cart-button"
         onClick={() => setCartOpen(true)}
       >
         <img src={emptyCart} alt="Cart" className="w-8 h-8" />
         {totalItems > 0 && (
           <div
-            className="absolute flex items-center justify-center w-5 h-5 -mt-1 -mr-1 text-sm text-white bg-green-500 rounded-full -top-1 -right-2"
+            className="cart-count"
           >
             {totalItems}
           </div>
         )}
-      </div>
+      </button>
 
       {/* Cart Modal - You can add this if needed */}
       {/* {isCartOpen && (

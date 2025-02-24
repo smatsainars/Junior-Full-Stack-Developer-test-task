@@ -1,0 +1,107 @@
+.product-gallery {
+
+    .gallery-container {
+        display: flex;
+        justify-content: flex-start;
+        gap: 20px;
+        position: sticky;
+        top: 20px;
+
+        /* Thumbnails column on the left */
+        .thumbnails-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 600px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 10px;
+
+            .thumbnail {
+                width: 100px;
+                aspect-ratio: 1/1;
+                cursor: pointer;
+                border: 2px solid transparent;
+                transition: border-color 0.2s;
+                position: relative;
+
+                &.active {
+                    border-color: #5B9A8B;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    aspect-ratio: 1/1;
+
+                }
+            }
+
+            /* Scrollbar styling for thumbnails column */
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: #888;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+        }
+
+        .main-slider {
+            width: 575px;
+            height: 478px;
+
+            .main-image-container {
+                position: relative;
+                width: 100%;
+                padding-top: 100%;
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover; // or 'contain' if you want to see the entire image
+                }
+            }
+        }
+    }
+
+    .slick-slide {
+        outline: none;
+    }
+
+    .slick-prev,
+    .slick-next {
+        z-index: 1;
+        width: 32px;
+        height: 32px;
+        border-radius: 0%;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+
+        &:before {
+            color: #333;
+            font-size: 24px;
+        }
+    }
+
+    .slick-prev {
+        left: 15px;
+    }
+
+    .slick-next {
+        right: 15px;
+    }
+}
