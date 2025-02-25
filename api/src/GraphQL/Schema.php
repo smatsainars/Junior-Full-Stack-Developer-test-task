@@ -6,7 +6,7 @@ use GraphQL\Type\Schema as GraphQLSchema;
 use GraphQL\Type\Definition\ObjectType;
 use App\GraphQL\Query\{CategoryQuery, ProductQuery, CurrencyQuery};
 use App\GraphQL\Mutation\CartMutation;
-use App\GraphQL\Types\{BaseType, CategoryType, ProductType, CurrencyType, PriceType, AttributeType, AttributeItemType};
+use App\GraphQL\Types\BaseType;
 use Doctrine\ORM\EntityManager;
 
 class Schema
