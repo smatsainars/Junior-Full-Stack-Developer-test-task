@@ -84,14 +84,6 @@ This project is a full-stack e-commerce application built as part of a Junior Fu
   /vendor        # Dependencies (managed by Composer)
 ```
 
-## Installation and Setup
-
-### Prerequisites
-- PHP 8.1 or higher
-- MySQL 5.6 or higher
-- Node.js and npm
-- Composer
-
 ## OOP Approach and Architecture
 
 The backend implementation follows object-oriented programming principles:
