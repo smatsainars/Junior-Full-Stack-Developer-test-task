@@ -87,10 +87,10 @@ This project is a full-stack e-commerce application built as part of a Junior Fu
 ## Installation and Setup
 
 ### Prerequisites
-- PHP 8.1 
-- MySQL 5.6 
-- Node.js and npm
-- Composer
+- PHP 8.x or higher
+- MySQL 5.x or higher
+- Node.js v22.x or higher and npm
+- Composer 2.x or higher
 
 ## Acknowledgements
 
