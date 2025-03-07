@@ -1,4 +1,3 @@
-// src/components/ProductDetails/ProductDetails.tsx
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_PRODUCT } from '../../graphql/queries';
