@@ -95,7 +95,7 @@ This project is a full-stack e-commerce application built as part of a Junior Fu
 ### Backend Setup
 1. Clone the repository
    ```
-   git clone https://github.com/yourusername/junior-fullstack-ecommerce.git
+   git clone https://github.com/smatsainars/junior-fullstack-ecommerce.git
    cd junior-fullstack-ecommerce
    ```
 
