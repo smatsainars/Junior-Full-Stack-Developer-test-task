@@ -7,10 +7,9 @@ use App\Seeder\DataSeeder;
 
 try {
     echo "Resetting database...\n";
-    
+
     $connection = $entityManager->getConnection();
-    
-    // Drop tables in correct order
+
     $tables = [
         'attribute_items',
         'product_images',
@@ -27,13 +26,11 @@ try {
         echo "  ✓ Dropped table: $table\n";
     }
 
-    // Create new schema
     $tool = new \Doctrine\ORM\Tools\SchemaTool($entityManager);
     $classes = $entityManager->getMetadataFactory()->getAllMetadata();
     $tool->createSchema($classes);
     echo "✅ Database schema recreated successfully\n";
 
-    // Run seeder
     echo "\nRunning seeder...\n";
     $seeder = new DataSeeder($entityManager);
     $seeder->seed();

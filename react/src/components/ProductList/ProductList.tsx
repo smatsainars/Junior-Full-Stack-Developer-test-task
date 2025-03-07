@@ -1,4 +1,3 @@
-// src/components/ProductList/ProductList.tsx
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_PRODUCTS } from '../../graphql/queries';
@@ -15,12 +14,10 @@ const ProductList: React.FC<ProductListProps> = ({
   category,
   onAddToCart,
 }) => {
-  // Use GET_PRODUCTS query with category variable
   const { loading, error, data } = useQuery(GET_PRODUCTS, {
     variables: { category: category === 'all' ? null : category },
   });
 
-  console.log('ProductList:', { loading, error, data, category });
 
   if (loading) {
     return (

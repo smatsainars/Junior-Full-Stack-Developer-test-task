@@ -1,7 +1,5 @@
-// src/graphql/queries.ts
 import { gql } from '@apollo/client';
 
-// Query for a single product by ID
 export const GET_PRODUCT = gql`
   query GetProduct($id: String!) {
     product(id: $id) {
@@ -31,7 +29,6 @@ export const GET_PRODUCT = gql`
   }
 `;
 
-// Query for multiple products (optionally by category)
 export const GET_PRODUCTS = gql`
   query GetProducts($category: String) {
     products(category: $category) {

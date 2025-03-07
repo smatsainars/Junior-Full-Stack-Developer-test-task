@@ -66,18 +66,6 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         )}
       </button>
-
-      {/* Cart Modal - You can add this if needed */}
-      {/* {isCartOpen && (
-        <>
-          <div 
-            className="absolute inset-x-0 z-50 h-screen bg-black opacity-25 top-full -right-20 -left-20"
-            onClick={() => setCartOpen(false)}
-            data-testid="cart-overlay"
-          />
-          <CartModal cartItems={cartItems} />
-        </>
-      )} */}
     </header>
   );
 };

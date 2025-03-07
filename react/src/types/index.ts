@@ -1,4 +1,3 @@
-// src/types/index.ts
 export interface AttributeItem {
   id: string;
   displayValue: string;

@@ -19,21 +19,21 @@ class ProductQuery extends BaseQuery
             'resolve' => function ($root, $args) {
                 $qb = self::$entityManager->createQueryBuilder();
                 $qb->select('p, c, g, a, ai, pr')
-                   ->from(Product::class, 'p')
-                   ->leftJoin('p.category', 'c')
-                   ->leftJoin('p.gallery', 'g')
-                   ->leftJoin('p.attributes', 'a')
-                   ->leftJoin('a.items', 'ai')
-                   ->leftJoin('p.price', 'pr');
+                    ->from(Product::class, 'p')
+                    ->leftJoin('p.category', 'c')
+                    ->leftJoin('p.gallery', 'g')
+                    ->leftJoin('p.attributes', 'a')
+                    ->leftJoin('a.items', 'ai')
+                    ->leftJoin('p.price', 'pr');
 
                 if (!empty($args['category']) && $args['category'] !== 'all') {
                     $qb->andWhere('LOWER(c.name) = LOWER(:category)')
-                       ->setParameter('category', $args['category']);
+                        ->setParameter('category', $args['category']);
                 }
 
                 if (!empty($args['search'])) {
                     $qb->andWhere('LOWER(p.name) LIKE LOWER(:search)')
-                       ->setParameter('search', '%' . $args['search'] . '%');
+                        ->setParameter('search', '%' . $args['search'] . '%');
                 }
 
                 $qb->addOrderBy('p.name', 'ASC');

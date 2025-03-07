@@ -10,13 +10,14 @@
     top: 0;
     left: 0;
     right: 0;
+
     .wrap-navbar-menu {
         display: flex;
-    
+
         .link-navbar {
             padding: 4px 16px 0;
             text-transform: uppercase;
-        
+
             font-weight: 600;
             font-size: 16px;
 
@@ -28,15 +29,16 @@
                 color: #5ECE7B;
 
                 border-bottom: 2px solid #5ECE7B;
-                
+
             }
         }
-
     }
-    .cart-button{
+
+    .cart-button {
         display: flex;
         align-items: center;
         position: relative;
+
         .cart-count {
             position: absolute;
             top: 4px;
@@ -52,6 +54,5 @@
             justify-content: center;
             font-weight: 700;
         }
-        
     }
 }

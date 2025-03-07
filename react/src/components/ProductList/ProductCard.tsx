@@ -1,4 +1,3 @@
-// src/components/ProductList/ProductCard.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../types';
@@ -16,7 +15,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onAddToCart
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const price = product.prices[0]; // Using first price (USD)
+  const price = product.prices[0]; 
 
   const getDefaultAttributes = () => {
     const defaultAttrs: Record<string, string> = {};
@@ -41,6 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       className="wrap-product-card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      data-testid={`product-${product.name.toLowerCase().replace(/\s+/g, '-')}`}
     >
       <div className={`wrap-img ${!product.inStock && 'opacity-50'}`}>
         <img 

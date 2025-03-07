@@ -1,4 +1,3 @@
-// src/App.tsx
 import React, { useState } from "react";
 import { ApolloProvider } from "@apollo/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -44,11 +43,10 @@ function App() {
     }
   };
 
-  const onUpdateAttributes = (id: string, attributeName: string, value: string) => {
-    console.log('onUpdateAttributes:', id, attributeName, value);
-    
-    setCartItems(cartItems.map(item => {
-      if (item.id === id) {
+  const onUpdateAttributes = (index: number, attributeName: string, value: string) => {
+
+    setCartItems(cartItems.map((item,currentIndex) => {
+      if (currentIndex === index) {
         return {
           ...item,
           selectedAttributes: {

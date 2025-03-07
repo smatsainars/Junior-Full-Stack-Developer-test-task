@@ -6,7 +6,7 @@ import './CartItem.scss';
 interface CartItemProps {
   item: CartItemType;
   onUpdateQuantity: (id: string, quantity: number) => void;
-  onUpdateAttributes: (id: string, attributeName: string, value: string) => void;
+  onUpdateAttributes: (attributeName: string, value: string) => void;
 }
 
 const CartItem: React.FC<CartItemProps> = ({ 
@@ -17,7 +17,7 @@ const CartItem: React.FC<CartItemProps> = ({
   const price = item.prices[0];
 
   const handleAttributeChange = (attributeName: string, value: string) => {
-    onUpdateAttributes(item.id, attributeName, value);
+    onUpdateAttributes(attributeName, value);
   };
 
   return (
@@ -88,6 +88,7 @@ const CartItem: React.FC<CartItemProps> = ({
       </div>
       <div className="cart-item__actions">
         <img
+          data-testid='cart-item-amount'
           src={item.gallery[0]}
           alt={item.name}
           className="cart-item__image"

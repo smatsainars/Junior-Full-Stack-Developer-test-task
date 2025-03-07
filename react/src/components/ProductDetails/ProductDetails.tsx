@@ -24,8 +24,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
     variables: { id: id }
   });
 
-  console.log('ProductDetails:', { loading, error, data });
-  
+ 
 
   if (loading) return (
     <div className="flex justify-center items-center min-h-[600px]">
@@ -41,7 +40,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
 
   const product = data?.product as Product;
   if (!product) return null;
-  console.log(product);
   
   const price = product.prices[0];
   const allAttributesSelected = product.attributes?.every((attr) => 
@@ -81,6 +79,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
             } text-white`}
             disabled={!product.inStock || !allAttributesSelected}
             onClick={() => onAddToCart(product, selectedAttributes)}
+            data-testid="add-to-cart"
           >
             {!product.inStock ? 'OUT OF STOCK' : 'ADD TO CART'}
           </button>

@@ -1,4 +1,3 @@
-// src/components/ProductDetails/ProductAttributes.tsx
 import React from 'react';
 import { Attribute } from '../../types';
 
@@ -24,7 +23,6 @@ const ProductAttributes: React.FC<ProductAttributesProps> = ({
           <h3 className="text-sm font-semibold uppercase mb-2">{attribute.name}:</h3>
           <div className="wrap-attribute-items">
             {attribute.type === 'swatch' ? (
-              // Color swatches
               attribute.items.map(item => (
                 <button
                   key={item.id}
@@ -39,7 +37,6 @@ const ProductAttributes: React.FC<ProductAttributesProps> = ({
                 />
               ))
             ) : (
-              // Regular buttons (text, size, etc)
               attribute.items.map(item => (
                 <button
                   key={item.id}
@@ -49,6 +46,7 @@ const ProductAttributes: React.FC<ProductAttributesProps> = ({
                       ? 'active'
                       : ''
                   }`}
+                  data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   {item.displayValue}
                 </button>

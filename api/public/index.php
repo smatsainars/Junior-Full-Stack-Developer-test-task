@@ -7,8 +7,6 @@ use FastRoute\Dispatcher;
 use function FastRoute\simpleDispatcher;
 use App\Controller\GraphQL;
 
-
-// CORS Headers
 header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -19,18 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// 2) Get the EntityManager (from bootstrap.php)
 $entityManager = require __DIR__ . '/../config/bootstrap.php';
 
-// 3) Pass the EntityManager to our GraphQL controller
 GraphQL::setEntityManager($entityManager);
 
-// 4) Define FastRoute routes
 $dispatcher = simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('POST', '/graphql', [GraphQL::class, 'handle']);
 });
 
-// 5) Dispatch the current request
 $routeInfo = $dispatcher->dispatch(
     $_SERVER['REQUEST_METHOD'],
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)

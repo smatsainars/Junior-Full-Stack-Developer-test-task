@@ -1,4 +1,3 @@
-// src/components/ProductDetails/ProductGallery.tsx
 import React, { useState } from 'react';
 import Slider from 'react-slick';
 import type { Settings } from 'react-slick';
@@ -6,7 +5,6 @@ import { Product } from '../../types';
 
 import './ProductGallery.scss';
 
-// Import slick-carousel CSS
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -26,7 +24,6 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ gallery }) => {
     slidesToScroll: 1,
     arrows: gallery.length > 1,
     beforeChange: (_, next) => setCurrentSlide(next),
-    // You can style or replace these buttons as needed:
     prevArrow: <button className="slick-prev">Previous</button>,
     nextArrow: <button className="slick-next">Next</button>
   };
@@ -42,7 +39,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ gallery }) => {
   };
 
   return (
-    <div className="product-gallery">
+    <div className="product-gallery" data-testid="product-gallery">
       <div className="gallery-container">
         {/* Thumbnails Column */}
         <div className="thumbnails-column">

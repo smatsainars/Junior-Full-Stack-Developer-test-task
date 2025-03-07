@@ -20,7 +20,6 @@ class DataSeeder
 
     public function seed()
     {
-        // Clear existing data
         $connection = $this->entityManager->getConnection();
         $connection->executeStatement('SET FOREIGN_KEY_CHECKS = 0');
         $connection->executeStatement('TRUNCATE TABLE attribute_items');
@@ -33,7 +32,7 @@ class DataSeeder
 
         $this->seedCategories();
         $this->seedProducts();
-        
+
         $this->entityManager->flush();
         echo "✅ Database seeded successfully!\n";
     }
@@ -60,12 +59,10 @@ class DataSeeder
             $product->setDescription($productData['description']);
             $product->setBrand($productData['brand']);
 
-            // Set category
             if (isset($productData['category']) && isset($this->categories[$productData['category']])) {
                 $product->setCategory($this->categories[$productData['category']]);
             }
 
-            // Add images
             foreach ($productData['gallery'] as $imageUrl) {
                 $image = new ProductImage();
                 $image->setUrl($imageUrl);
@@ -73,7 +70,6 @@ class DataSeeder
                 $this->entityManager->persist($image);
             }
 
-            // Add attributes
             if (isset($productData['attributes'])) {
                 foreach ($productData['attributes'] as $attributeData) {
                     $attribute = new ProductAttribute();
@@ -94,7 +90,6 @@ class DataSeeder
                 }
             }
 
-            // Add price
             if (isset($productData['prices'][0])) {
                 $priceData = $productData['prices'][0];
                 $price = new ProductPrice();
@@ -111,7 +106,6 @@ class DataSeeder
     }
 }
 
-// Run seeder if file is executed directly
 if (basename(__FILE__) === basename($_SERVER["SCRIPT_FILENAME"])) {
     $entityManager = require __DIR__ . '/../../config/bootstrap.php';
     $seeder = new DataSeeder($entityManager);
