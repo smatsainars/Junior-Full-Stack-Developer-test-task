@@ -92,6 +92,52 @@ This project is a full-stack e-commerce application built as part of a Junior Fu
 - Node.js v22.x or higher and npm
 - Composer 2.x or higher
 
+### Backend Setup
+1. Clone the repository
+   ```
+   git clone https://github.com/yourusername/junior-fullstack-ecommerce.git
+   cd junior-fullstack-ecommerce
+   ```
+
+2. Install PHP dependencies
+   ```
+   cd api
+   composer install
+   ```
+
+3. Configure environment variables
+   ```
+   cp .env.example .env
+   ```
+   Update the `.env` file with your database credentials
+
+4. Set up the database
+   ```
+   php src/Seeder/reset-db.php
+   php src/Seeder/DataSeeder.php
+   ```
+
+5. Start the PHP server
+   ```
+   php -S localhost:8000 -t public
+   ```
+
+### Frontend Setup
+1. Navigate to the frontend directory
+   ```
+   cd react
+   ```
+
+2. Install dependencies
+   ```
+   npm install
+   ```
+
+3. Start the development server
+   ```
+   npm run dev
+   ```
+
 ## Acknowledgements
 
 This project was created as a test task for a Junior Full Stack Developer position. The project requirements and design were provided as part of the assignment.
