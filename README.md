@@ -95,8 +95,8 @@ This project is a full-stack e-commerce application built as part of a Junior Fu
 ### Backend Setup
 1. Clone the repository
    ```
-   git clone https://github.com/smatsainars/junior-fullstack-ecommerce.git
-   cd junior-fullstack-ecommerce
+   git clone https://github.com/yourusername/Junior-Full-Stack-Developer-test-task.git
+   cd Junior-Full-Stack-Developer-test-task
    ```
 
 2. Install PHP dependencies
