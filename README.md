@@ -84,23 +84,13 @@ This project is a full-stack e-commerce application built as part of a Junior Fu
   /vendor        # Dependencies (managed by Composer)
 ```
 
-## OOP Approach and Architecture
+## Installation and Setup
 
-The backend implementation follows object-oriented programming principles:
-- **Inheritance** - Used for extending base product and attribute classes
-- **Polymorphism** - Different product types handled by specialized classes
-- **Encapsulation** - Data and behavior contained within appropriate classes
-- **PSR Compliance** - Code follows PSR-1, PSR-4, and PSR-12 standards
-
-Doctrine ORM is used to map database tables to PHP objects, providing a clean abstraction layer for database operations.
-
-## GraphQL Implementation
-
-The API uses GraphQL to provide efficient data retrieval:
-- **Schema** - Defines the structure of available data
-- **Queries** - For fetching categories and products
-- **Mutations** - For placing orders
-- **Resolvers** - Handle the logic for each query and mutation
+### Prerequisites
+- PHP 8.1 
+- MySQL 5.6 
+- Node.js and npm
+- Composer
 
 ## Acknowledgements
 
