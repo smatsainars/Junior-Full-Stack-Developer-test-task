@@ -12,6 +12,31 @@ type ProductGalleryProps = {
   gallery: Product['gallery'];
 };
 
+// Custom arrow components to properly handle slick-carousel props
+type ArrowProps = {
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  currentSlide?: number;
+  slideCount?: number;
+};
+
+const PrevArrow: React.FC<ArrowProps> = ({ className, onClick }) => {
+  return (
+    <button className={`slick-prev ${className || ''}`} onClick={onClick}>
+      Previous
+    </button>
+  );
+};
+
+const NextArrow: React.FC<ArrowProps> = ({ className, onClick }) => {
+  return (
+    <button className={`slick-next ${className || ''}`} onClick={onClick}>
+      Next
+    </button>
+  );
+};
+
 const ProductGallery: React.FC<ProductGalleryProps> = ({ gallery }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slider, setSlider] = useState<Slider | null>(null);
@@ -24,8 +49,8 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ gallery }) => {
     slidesToScroll: 1,
     arrows: gallery.length > 1,
     beforeChange: (_, next) => setCurrentSlide(next),
-    prevArrow: <button className="slick-prev">Previous</button>,
-    nextArrow: <button className="slick-next">Next</button>
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />
   };
 
   if (!gallery || gallery.length === 0) {
@@ -56,7 +81,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ gallery }) => {
             </div>
           ))}
         </div>
-
+        
         {/* Main Slider */}
         <div className="main-slider">
           <Slider ref={setSlider} {...settings}>
@@ -73,8 +98,6 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ gallery }) => {
           </Slider>
         </div>
       </div>
-
-
     </div>
   );
 };
