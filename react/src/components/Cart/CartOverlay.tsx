@@ -25,7 +25,7 @@ const CartOverlay: React.FC<CartOverlayProps> = ({
   return (
     <>
       <div
-        data-testid='cart-btn'
+        data-testid="cart-overlay"
         className="overlay"
         onClick={onClose}
       />
@@ -54,7 +54,7 @@ const CartOverlay: React.FC<CartOverlayProps> = ({
           )}
           
           <div
-            data-testid='cart-total'
+            data-testid="cart-total"
             className="cart-total"
           >
             <span className="font-semibold">Total:</span> <span>${totalAmount.toFixed(2)}</span>

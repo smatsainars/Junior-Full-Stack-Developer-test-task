@@ -39,7 +39,7 @@ const ProductAttributes: React.FC<ProductAttributesProps> = ({
                   }`}
                   style={{ backgroundColor: item.value }}
                   title={item.displayValue}
-                  data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}-${item.value.toLowerCase().replace(/\s+/g, '-')}`}
+                  data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}-${item.value.replace(/\s+/g, '-')}`}
                 />
               ))
             ) : (
@@ -52,7 +52,7 @@ const ProductAttributes: React.FC<ProductAttributesProps> = ({
                       ? 'active'
                       : ''
                   }`}
-                  data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}-${item.value.toLowerCase().replace(/\s+/g, '-')}`}
+                  data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}-${item.value.replace(/\s+/g, '-')}`}
                 >
                   {item.displayValue}
                 </button>

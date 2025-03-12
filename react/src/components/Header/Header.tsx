@@ -6,14 +6,14 @@ import logo from '../../assets/logo.png';
 import emptyCart from '../../assets/empty-cart.svg';
 
 interface HeaderProps {
-  setCartOpen: (isOpen: boolean) => void;
+  toggleCart: () => void;
   cartItems: CartItem[];
   currentCategory: string;
   setCurrentCategory: (category: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
-  setCartOpen,
+  toggleCart,
   cartItems,
   currentCategory,
   setCurrentCategory
@@ -55,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({
       <button
         className="cart-button"
         data-testid="cart-btn"
-        onClick={() => setCartOpen(true)}
+        onClick={() => toggleCart()}
       >
         <img src={emptyCart} alt="Cart" className="w-8 h-8" />
         {totalItems > 0 && (

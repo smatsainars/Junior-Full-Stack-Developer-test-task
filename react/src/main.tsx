@@ -69,7 +69,7 @@ function App() {
     <BrowserRouter>
       <div className="min-h-screen">
         <Header 
-          setCartOpen={setIsCartOpen}
+          toggleCart={() => setIsCartOpen(!isCartOpen)}
           cartItems={cartItems}
           currentCategory={currentCategory}
           setCurrentCategory={setCurrentCategory}
