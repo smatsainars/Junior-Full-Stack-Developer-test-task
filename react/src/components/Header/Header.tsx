@@ -30,10 +30,9 @@ const Header: React.FC<HeaderProps> = ({
         {['all', 'tech', 'clothes'].map((category) => (
           <Link
             key={category}
-            to={`/${category === 'all' ? '' : `category/${category}`}`}
+            to={`/${category}`}
             data-testid={category === activeCategory ? 'active-category-link' : 'category-link'}
-            className={`link-navbar ${category === activeCategory ? 'active border-b-2' : ''
-              }`}
+            className={`link-navbar ${category === activeCategory ? 'active border-b-2' : ''}`}
             onClick={() => setCurrentCategory(category)}
           >
             {category}
@@ -55,6 +54,7 @@ const Header: React.FC<HeaderProps> = ({
       {/* Right section: Cart Button */}
       <button
         className="cart-button"
+        data-testid="cart-btn"
         onClick={() => setCartOpen(true)}
       >
         <img src={emptyCart} alt="Cart" className="w-8 h-8" />

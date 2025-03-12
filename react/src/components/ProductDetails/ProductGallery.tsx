@@ -12,7 +12,6 @@ type ProductGalleryProps = {
   gallery: Product['gallery'];
 };
 
-// Custom arrow components to properly handle slick-carousel props
 type ArrowProps = {
   className?: string;
   style?: React.CSSProperties;

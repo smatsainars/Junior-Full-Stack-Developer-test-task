@@ -1,6 +1,6 @@
 import { useState, StrictMode } from "react";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import Header from "./components/Header/Header";
@@ -9,9 +9,8 @@ import CartOverlay from "./components/Cart/CartOverlay";
 import { CartItem, Product } from "./types";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 
-// Create Apollo Client
 const client = new ApolloClient({
-  uri: 'https://juniorfullstackdevelopertesttask.shop/graphql',
+  uri: 'http://localhost:8000/graphql',
   cache: new InMemoryCache()
 });
 
@@ -40,12 +39,12 @@ function App() {
     setIsCartOpen(true);
   };
   
-  const handleUpdateCartItem = (id: string, quantity: number) => {
+  const handleUpdateCartItem = (index: number, quantity: number) => {
     if (quantity === 0) {
-      setCartItems(cartItems.filter(item => item.id !== id));
+      setCartItems(cartItems.filter((_, itemIndex) => itemIndex !== index));
     } else {
-      setCartItems(cartItems.map(item => 
-        item.id === id ? { ...item, quantity } : item
+      setCartItems(cartItems.map((item, itemIndex) => 
+        itemIndex === index ? { ...item, quantity } : item
       ));
     }
   };
@@ -77,28 +76,55 @@ function App() {
         
         <main className="wrap-main">
           <Routes>
-            <Route 
+            <Route
               path="/"
+              element={<Navigate to="/all" replace />}
+            />
+            
+            <Route
+              path="/all"
               element={
                 <ProductList
-                  category={currentCategory}
+                  category="all"
                   onAddToCart={handleAddToCart}
                 />
               }
             />
-            <Route 
+            
+            <Route
+              path="/tech"
+              element={
+                <ProductList
+                  category="tech"
+                  onAddToCart={handleAddToCart}
+                />
+              }
+            />
+            
+            <Route
+              path="/clothes"
+              element={
+                <ProductList
+                  category="clothes"
+                  onAddToCart={handleAddToCart}
+                />
+              }
+            />
+
+            <Route
+              path="/product/:id"
+              element={
+                <ProductDetails
+                  onAddToCart={handleAddToCart}
+                />
+              }
+            />
+            
+            <Route
               path="/category/:category"
               element={
                 <ProductList
                   category={currentCategory}
-                  onAddToCart={handleAddToCart}
-                />
-              }
-            />
-            <Route 
-              path="/product/:id"
-              element={
-                <ProductDetails
                   onAddToCart={handleAddToCart}
                 />
               }
@@ -119,7 +145,6 @@ function App() {
   );
 }
 
-// Entry point
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error("Root element not found");

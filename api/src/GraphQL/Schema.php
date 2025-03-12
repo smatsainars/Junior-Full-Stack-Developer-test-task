@@ -16,8 +16,6 @@ class Schema
     public static function setEntityManager(EntityManager $em): void
     {
         self::$entityManager = $em;
-
-        // If your base classes need the EM, set it there too:
         BaseType::setEntityManager($em);
         Query\BaseQuery::setEntityManager($em);
         Mutation\BaseMutation::setEntityManager($em);
