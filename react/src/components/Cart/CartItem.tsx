@@ -6,20 +6,16 @@ interface CartItemProps {
   item: CartItemType;
   index: number;
   onUpdateQuantity: (index: number, quantity: number) => void;
-  onUpdateAttributes: (attributeName: string, value: string) => void;
 }
 
 const CartItem: React.FC<CartItemProps> = ({
   item,
   index,
   onUpdateQuantity,
-  onUpdateAttributes
 }) => {
   const price = item.prices[0];
   
-  const handleAttributeChange = (attributeName: string, value: string) => {
-    onUpdateAttributes(attributeName, value);
-  };
+ 
   
   return (
     <div className="cart-item">
@@ -37,7 +33,7 @@ const CartItem: React.FC<CartItemProps> = ({
             <div className="attribute-options">
               {attr.type === 'swatch' ? (
                 attr.items.map((option) => (
-                  <button
+                  <div
                     key={`${attr.name}-${option.value}`}
                     data-testid={`cart-item-attribute-${attr.name.toLowerCase().replace(/\s+/g, '-')}-${option.value.toLowerCase().replace(/\s+/g, '-')}${
                       item.selectedAttributes[attr.name] === option.value ? '-selected' : ''
@@ -46,12 +42,11 @@ const CartItem: React.FC<CartItemProps> = ({
                       item.selectedAttributes[attr.name] === option.value ? 'active' : ''
                     }`}
                     style={{ backgroundColor: option.value }}
-                    onClick={() => handleAttributeChange(attr.name, option.value)}
                   />
                 ))
               ) : (
                 attr.items.map((option) => (
-                  <button
+                  <div
                     key={`${attr.name}-${option.value}`}
                     data-testid={`cart-item-attribute-${attr.name.toLowerCase().replace(/\s+/g, '-')}-${option.value.toLowerCase().replace(/\s+/g, '-')}${
                       item.selectedAttributes[attr.name] === option.value ? '-selected' : ''
@@ -59,10 +54,9 @@ const CartItem: React.FC<CartItemProps> = ({
                     className={`btn-size ${
                       item.selectedAttributes[attr.name] === option.value ? 'active' : ''
                     }`}
-                    onClick={() => handleAttributeChange(attr.name, option.value)}
                   >
                     {option.displayValue}
-                  </button>
+                  </div>
                 ))
               )}
             </div>

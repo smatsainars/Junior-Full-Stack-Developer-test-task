@@ -9,11 +9,14 @@
 }
 
 .wrap-main{
-  
   width: 100%;
   max-width: 1440px;
-  margin: 0 auto;
-  padding: 150px 100px;
+  margin: 0 100px;
+  padding: 150px
+}
+.outside-wrap{
+  display: flex;
+  justify-content: center
 }
 
 h1, h2, h3, h4, h5, h6 {

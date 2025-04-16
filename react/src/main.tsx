@@ -1,4 +1,4 @@
-import { useState, StrictMode } from "react";
+import { useState, StrictMode, useEffect } from "react";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { createRoot } from 'react-dom/client';
@@ -17,8 +17,15 @@ const client = new ApolloClient({
 
 function App() {
   const [currentCategory, setCurrentCategory] = useState<string>('all');
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const savedCart = sessionStorage.getItem('cartItems');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  
+  useEffect(() => {
+    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
   
   const handleAddToCart = (product: Product, selectedAttributes: Record<string, string>) => {
     const existingItemIndex = cartItems.findIndex(item => 
@@ -39,6 +46,11 @@ function App() {
     }
     setIsCartOpen(true);
   };
+
+  const handleCategoryChange = (category: string) => {
+    setCurrentCategory(category);
+    setIsCartOpen(false);
+  };
   
   const handleUpdateCartItem = (index: number, quantity: number) => {
     if (quantity === 0) {
@@ -49,30 +61,20 @@ function App() {
       ));
     }
   };
-  
-  const onUpdateAttributes = (index: number, attributeName: string, value: string) => {
-    setCartItems(cartItems.map((item, currentIndex) => {
-      if (currentIndex === index) {
-        return {
-          ...item,
-          selectedAttributes: {
-            ...item.selectedAttributes,
-            [attributeName]: value
-          }
-        };
-      }
-      return item;
-    }));
-  }
+
+  const handleClearCart = () => {
+    setCartItems([]);
+    sessionStorage.removeItem('cartItems');
+  };
   
   return (
     <BrowserRouter>
-      <div className="min-h-screen">
+      <div className="outside-wrap">
         <Header 
           toggleCart={() => setIsCartOpen(!isCartOpen)}
           cartItems={cartItems}
           currentCategory={currentCategory}
-          setCurrentCategory={setCurrentCategory}
+          setCurrentCategory={handleCategoryChange}
         />
         
         <main className="wrap-main">
@@ -80,6 +82,7 @@ function App() {
             <Route
               path="/"
               element={<Navigate to="/all" replace />}
+              
             />
             
             <Route
@@ -117,6 +120,7 @@ function App() {
               element={
                 <ProductDetails
                   onAddToCart={handleAddToCart}
+                  
                 />
               }
             />
@@ -138,7 +142,7 @@ function App() {
             items={cartItems}
             onClose={() => setIsCartOpen(false)}
             onUpdateQuantity={handleUpdateCartItem}
-            onUpdateAttributes={onUpdateAttributes}
+            onClearCart={handleClearCart}
           />
         )}
       </div>

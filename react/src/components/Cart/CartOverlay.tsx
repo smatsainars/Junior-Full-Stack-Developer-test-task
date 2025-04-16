@@ -6,15 +6,16 @@ import './CartOverlay.scss';
 interface CartOverlayProps {
   items: CartItemType[];
   onClose: () => void;
-  onUpdateQuantity: (index: number, quantity: number) => void; // Changed from id to index
-  onUpdateAttributes: (index: number, attributeName: string, value: string) => void;
+  onUpdateQuantity: (index: number, quantity: number) => void;
+  onClearCart: () => void;
 }
 
 const CartOverlay: React.FC<CartOverlayProps> = ({
   items,
   onClose,
   onUpdateQuantity,
-  onUpdateAttributes
+  onClearCart,
+
 }) => {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalAmount = items.reduce((sum, item) => {
@@ -47,7 +48,6 @@ const CartOverlay: React.FC<CartOverlayProps> = ({
                   item={item}
                   index={index}
                   onUpdateQuantity={onUpdateQuantity}
-                  onUpdateAttributes={(name, value) => onUpdateAttributes(index, name, value)}
                 />
               ))}
             </div>
@@ -62,7 +62,10 @@ const CartOverlay: React.FC<CartOverlayProps> = ({
         </div>
         <div className="wrap-cart-action">
           <button
-            onClick={onClose}
+            onClick={() => {
+              onClose();
+              onClearCart();
+            }}
             className="primary-btn"
           >
             PLACE ORDER
