@@ -7,13 +7,22 @@ use FastRoute\Dispatcher;
 use function FastRoute\simpleDispatcher;
 use App\Controller\GraphQL;
 
-header('Access-Control-Allow-Origin: http://localhost:5173');
-header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
-header('Access-Control-Max-Age: 86400');
+$allowed_origins = [
+    'https://juniorfullstackdevelopertesttask.shop'
+];
+
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+
+if (in_array($origin, $allowed_origins)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Vary: Origin");
+    header("Access-Control-Allow-Methods: POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
+    header("Access-Control-Max-Age: 86400");
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header('HTTP/1.1 200 OK');
+    header("HTTP/1.1 200 OK");
     exit();
 }
 
