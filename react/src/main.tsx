@@ -10,7 +10,7 @@ import { CartItem, Product } from "./types";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 
 const client = new ApolloClient({
-  uri: 'https://juniorfullstackdevelopertesttask.shop/graphql',
+  uri: 'http://localhost:8000/graphql',
   cache: new InMemoryCache()
 });
 

@@ -6,6 +6,7 @@ use GraphQL\Type\Schema as GraphQLSchema;
 use GraphQL\Type\Definition\ObjectType;
 use App\GraphQL\Query\{CategoryQuery, ProductQuery, CurrencyQuery};
 use App\GraphQL\Mutation\CartMutation;
+use App\GraphQL\Mutation\OrderMutation;
 use App\GraphQL\Types\BaseType;
 use Doctrine\ORM\EntityManager;
 
@@ -33,16 +34,19 @@ class Schema
                 'fields' => function () {
                     return [
                         'categories' => CategoryQuery::get(),
-                        'products'   => ProductQuery::getList(),
-                        'product'    => ProductQuery::getOne(),
-                        'currency'   => CurrencyQuery::get(),
+                        'products' => ProductQuery::getList(),
+                        'product' => ProductQuery::getOne(),
+                        'currency' => CurrencyQuery::get(),
                     ];
                 },
             ]),
             'mutation' => new ObjectType([
                 'name' => 'Mutation',
                 'fields' => function () {
-                    return CartMutation::getFields();
+                    return array_merge(
+                        CartMutation::getFields(),
+                        OrderMutation::getFields()
+                    );
                 },
             ]),
         ]);

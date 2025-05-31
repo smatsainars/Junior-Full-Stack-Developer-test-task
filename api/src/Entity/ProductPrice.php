@@ -14,7 +14,7 @@ class ProductPrice
     private int $id;
 
     #[ORM\Column(type: "decimal", precision: 10, scale: 2)]
-    private float $amount;
+    private string $amount;
 
     #[ORM\Column(type: "string")]
     private string $currencyLabel;
@@ -30,14 +30,14 @@ class ProductPrice
         return $this->id;
     }
 
-    public function getAmount(): float
+    public function getAmount(): string
     {
         return $this->amount;
     }
 
     public function setAmount(float $amount): void
     {
-        $this->amount = $amount;
+        $this->amount = (string)$amount;
     }
 
     public function getCurrencyLabel(): string
