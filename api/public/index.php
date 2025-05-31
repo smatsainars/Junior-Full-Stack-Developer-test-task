@@ -8,7 +8,7 @@ use function FastRoute\simpleDispatcher;
 use App\Controller\GraphQL;
 
 $allowed_origins = [
-    'http://localhost:5173'
+    'https://juniorfullstackdevelopertesttask.shop'
 ];
 
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
