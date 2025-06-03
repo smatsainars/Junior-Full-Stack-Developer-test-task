@@ -32,6 +32,7 @@ GraphQL::setEntityManager($entityManager);
 
 $dispatcher = simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('POST', '/graphql', [GraphQL::class, 'handle']);
+    $r->addRoute('POST', '/api/graphql', [GraphQL::class, 'handle']);
 });
 
 $routeInfo = $dispatcher->dispatch(

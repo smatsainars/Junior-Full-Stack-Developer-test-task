@@ -11,7 +11,17 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 
 const client = new ApolloClient({
   uri: 'https://juniorfullstackdevelopertesttask.shop/api/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    addTypename: false
+  }),
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'cache-and-network',
+    },
+    query: {
+      fetchPolicy: 'network-only',
+    },
+  },
 });
 
 
